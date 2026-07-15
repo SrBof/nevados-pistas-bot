@@ -1,0 +1,43 @@
+name: Monitor pistas Nevados
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # cada 30 min (UTC). Ajusta la frecuencia si quieres.
+  workflow_dispatch:          # permite ejecutarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write             # necesario para commitear estado.json de vuelta
+
+concurrency:
+  group: monitor-nevados
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Ejecutar scraper
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scraper.py
+
+      - name: Guardar estado (commit)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add estado.json
+          if git diff --staged --quiet; then
+            echo "Sin cambios de estado que guardar."
+          else
+            git commit -m "Actualiza estado de pistas [skip ci]"
+            git push
+          fi
