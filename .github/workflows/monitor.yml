@@ -2,7 +2,8 @@ name: Monitor pistas Nevados
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # cada 30 min (UTC). Ajusta la frecuencia si quieres.
+    - cron: "*/10 * * * *"   # cada 10 min: chequeo de cambios (avisa solo si algo cambió)
+    - cron: "0 */2 * * *"    # cada 2 h: pulso de estado general (12 mensajes/día)
   workflow_dispatch:          # permite ejecutarlo a mano desde la pestaña Actions
 
 permissions:
@@ -28,7 +29,12 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scraper.py
+        run: |
+          if [ "${{ github.event.schedule }}" = "0 */2 * * *" ]; then
+            python scraper.py --pulso
+          else
+            python scraper.py
+          fi
 
       - name: Guardar estado (commit)
         run: |

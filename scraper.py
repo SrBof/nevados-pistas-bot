@@ -108,7 +108,26 @@ def diff_estados(viejo: dict, nuevo: dict) -> list[tuple[str, str, str]]:
     return cambios
 
 
-def construir_mensaje(cambios: list, ts: str) -> str:
+def contar(items: dict) -> dict:
+    pistas = [v for k, v in items.items() if k.startswith("Pista")]
+    andar = [v for k, v in items.items() if k.startswith("Andarivel")]
+    return {
+        "pistas_ab": sum(1 for v in pistas if v == "abierto"),
+        "pistas_tot": len(pistas),
+        "and_ab": sum(1 for v in andar if v == "abierto"),
+        "and_tot": len(andar),
+    }
+
+
+def linea_resumen(items: dict) -> str:
+    c = contar(items)
+    return (
+        f"📊 Pistas abiertas: {c['pistas_ab']}/{c['pistas_tot']} · "
+        f"Andariveles: {c['and_ab']}/{c['and_tot']}"
+    )
+
+
+def construir_mensaje(cambios: list, items: dict, ts: str) -> str:
     aperturas = [c for c in cambios if c[2] == "abierto"]
     cierres = [c for c in cambios if c[2] == "cerrado"]
     otros = [c for c in cambios if c[2] not in ("abierto", "cerrado")]
@@ -126,13 +145,33 @@ def construir_mensaje(cambios: list, ts: str) -> str:
         lineas.append("❓ <b>Estado inesperado (revisar):</b>")
         lineas += [f"  • {k}: {a} → {n}" for k, a, n in otros]
         lineas.append("")
+    lineas.append(linea_resumen(items))
     if ts:
         lineas.append(f"🕒 {ts}")
     lineas.append('<a href="https://www.nevadosdechillan.com/reporte-montana">Ver reporte</a>')
     return "\n".join(lineas)
 
 
-def main() -> None:
+def construir_pulso(items: dict, ts: str) -> str:
+    c = contar(items)
+    if c["pistas_ab"] == 0 and c["and_ab"] == 0:
+        estado_txt = "Todo cerrado por ahora."
+    else:
+        estado_txt = "🟢 Hay sectores abiertos."
+    lineas = [
+        "📊 <b>Nevados de Chillán — estado</b>",
+        "",
+        f"Pistas abiertas: {c['pistas_ab']}/{c['pistas_tot']}",
+        f"Andariveles abiertos: {c['and_ab']}/{c['and_tot']}",
+        estado_txt,
+    ]
+    if ts:
+        lineas.append(f"\n🕒 {ts}")
+    lineas.append('<a href="https://www.nevadosdechillan.com/reporte-montana">Ver reporte</a>')
+    return "\n".join(lineas)
+
+
+def main(modo: str = "check") -> None:
     items, ts = scrape()
 
     if len(items) < MIN_ITEMS_ESPERADOS:
@@ -146,14 +185,19 @@ def main() -> None:
 
     if estado is None:
         guardar_estado(items, ts)
+        if modo == "pulso":
+            notificar(construir_pulso(items, ts))
         abiertos = sum(1 for v in items.values() if v == "abierto")
-        print(f"Baseline creado: {len(items)} elementos, {abiertos} abiertos. Sin notificar (primer run).")
+        print(f"Baseline creado: {len(items)} elementos, {abiertos} abiertos.")
         return
 
     cambios = diff_estados(estado.get("items", {}), items)
     if cambios:
-        notificar(construir_mensaje(cambios, ts))
+        notificar(construir_mensaje(cambios, items, ts))
         print(f"{len(cambios)} cambio(s) notificado(s).")
+    elif modo == "pulso":
+        notificar(construir_pulso(items, ts))
+        print(f"Pulso enviado. ({ts})")
     else:
         print(f"Sin cambios. ({ts})")
 
@@ -161,4 +205,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    modo = "pulso" if "--pulso" in sys.argv else "check"
+    main(modo)
