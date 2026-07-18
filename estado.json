@@ -8,7 +8,7 @@
     "Andarivel · Cascada II": "abierto",
     "Andarivel · Iglú": "abierto",
     "Andarivel · Otto": "cerrado",
-    "Andarivel · Wenche": "cerrado",
+    "Andarivel · Wenche": "abierto",
     "Andarivel · Enlace": "cerrado",
     "Andarivel · Nono": "cerrado",
     "Andarivel · Mirador": "cerrado",
@@ -24,7 +24,7 @@
     "Pista · Cascada": "abierto",
     "Pista · Tres marías bosque": "cerrado",
     "Pista · Golf": "cerrado",
-    "Pista · Benno": "cerrado",
+    "Pista · Benno": "abierto",
     "Pista · Burro": "cerrado",
     "Pista · Águila": "cerrado",
     "Pista · Mula": "cerrado",
@@ -41,5 +41,5 @@
     "Pista · Vertiente": "cerrado",
     "Pista · Tres marías altas": "cerrado"
   },
-  "ts": "18-07-2026 12:31 am"
+  "ts": "18-07-2026 13:19 pm"
 }
