@@ -1,12 +1,12 @@
 {
   "items": {
-    "Andarivel · Tata": "cerrado",
+    "Andarivel · Tata": "desconocido",
     "Andarivel · Refugio": "cerrado",
-    "Andarivel · Novicio": "cerrado",
-    "Andarivel · Novato": "cerrado",
+    "Andarivel · Novicio": "abierto",
+    "Andarivel · Novato": "desconocido",
     "Andarivel · Cascada I": "cerrado",
     "Andarivel · Cascada II": "cerrado",
-    "Andarivel · Iglú": "cerrado",
+    "Andarivel · Iglú": "abierto",
     "Andarivel · Otto": "cerrado",
     "Andarivel · Wenche": "cerrado",
     "Andarivel · Enlace": "cerrado",
@@ -15,13 +15,13 @@
     "Andarivel · Cornisa": "cerrado",
     "Andarivel · Magic Carpet I": "cerrado",
     "Andarivel · Magic carpet II": "cerrado",
-    "Andarivel · Magic carpet mini escuela III": "cerrado",
-    "Andarivel · Magic carpet mini escuela IV": "cerrado",
-    "Pista · Carpinteros": "cerrado",
-    "Pista · Novicios": "cerrado",
-    "Pista · Bosque nevado": "cerrado",
+    "Andarivel · Magic carpet mini escuela III": "desconocido",
+    "Andarivel · Magic carpet mini escuela IV": "desconocido",
+    "Pista · Carpinteros": "abierto",
+    "Pista · Novicios": "abierto",
+    "Pista · Bosque nevado": "abierto",
     "Pista · Zorritos": "cerrado",
-    "Pista · Cascada": "cerrado",
+    "Pista · Cascada": "abierto",
     "Pista · Tres marías bosque": "cerrado",
     "Pista · Golf": "cerrado",
     "Pista · Benno": "cerrado",
@@ -41,5 +41,5 @@
     "Pista · Vertiente": "cerrado",
     "Pista · Tres marías altas": "cerrado"
   },
-  "ts": "15-07-2026 08:27 am"
+  "ts": "18-07-2026 09:22 am"
 }
