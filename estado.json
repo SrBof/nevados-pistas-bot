@@ -3,7 +3,7 @@
     "Andarivel · Tata": "abierto",
     "Andarivel · Refugio": "cerrado",
     "Andarivel · Novicio": "abierto",
-    "Andarivel · Novato": "desconocido",
+    "Andarivel · Novato": "abierto",
     "Andarivel · Cascada I": "cerrado",
     "Andarivel · Cascada II": "abierto",
     "Andarivel · Iglú": "abierto",
@@ -41,5 +41,5 @@
     "Pista · Vertiente": "cerrado",
     "Pista · Tres marías altas": "cerrado"
   },
-  "ts": "18-07-2026 11:20 am"
+  "ts": "18-07-2026 12:31 am"
 }
