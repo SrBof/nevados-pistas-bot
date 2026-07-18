@@ -5,7 +5,7 @@
     "Andarivel · Novicio": "abierto",
     "Andarivel · Novato": "desconocido",
     "Andarivel · Cascada I": "cerrado",
-    "Andarivel · Cascada II": "cerrado",
+    "Andarivel · Cascada II": "abierto",
     "Andarivel · Iglú": "abierto",
     "Andarivel · Otto": "cerrado",
     "Andarivel · Wenche": "cerrado",
@@ -15,7 +15,7 @@
     "Andarivel · Cornisa": "cerrado",
     "Andarivel · Magic Carpet I": "cerrado",
     "Andarivel · Magic carpet II": "cerrado",
-    "Andarivel · Magic carpet mini escuela III": "desconocido",
+    "Andarivel · Magic carpet mini escuela III": "abierto",
     "Andarivel · Magic carpet mini escuela IV": "cerrado",
     "Pista · Carpinteros": "abierto",
     "Pista · Novicios": "abierto",
@@ -41,5 +41,5 @@
     "Pista · Vertiente": "cerrado",
     "Pista · Tres marías altas": "cerrado"
   },
-  "ts": "18-07-2026 09:22 am"
+  "ts": "18-07-2026 11:20 am"
 }
